@@ -1,20 +1,20 @@
-function getHeaders(ss) {
-  return getFromNamedRange(ss)[0].getValues();
-}
-
-function getData(ss) {
-  return getFromNamedRange(ss)[1].getValues();
-}
-
-function getFromNamedRange(ss) {
+function getFromNamedRange(spreadSheet, sheetName, rangeName) {
   var DATA_OFFSET = 1
-  var sheet = ss.getSheetByName('Data Set');
-  
-  var range = ss.getRangeByName("RangeForExport");
+  var sheet = spreadSheet.getSheetByName(sheetName);
+  var range = spreadSheet.getRangeByName(rangeName);
+
   var headersRange = sheet.getRange(range.getRow(), range.getColumn(), 1, range.getLastColumn());
   var dataRange = sheet.getRange(range.getRow() + DATA_OFFSET, range.getColumn(), range.getLastRow(), range.getLastColumn());
 
   return [headersRange, dataRange];
+}
+
+function getHeaders(ranges) {
+  return ranges[0].getValues();
+}
+
+function getData(ranges) {
+  return ranges[1].getValues();
 }
 
 function getContentForTwitterBootstrap() { 
@@ -30,9 +30,10 @@ function doGet() {
   var ss = SpreadsheetApp.openById(spreadsheetId);
   
   var t = HtmlService.createTemplateFromFile('index');
-  t.headers = getHeaders(ss);
-  t.data = getData(ss);
-  t.content = getContentForTwitterBootstrap();
+  var headersAndData = getFromNamedRange(ss, 'Data Set', 'RangeForExport')
+  t.headers = getHeaders(headersAndData);
+  t.data = getData(headersAndData);
+  t.bootstrapContent = getContentForTwitterBootstrap();
   return t.evaluate();
 }
 
