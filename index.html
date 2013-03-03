@@ -2,9 +2,7 @@
   <head>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <?!=bootstrapContent?>
-    
     <style>
-      /* tables */
       body {
         padding-top: 10px;
         padding-bottom: 20px;
@@ -12,6 +10,7 @@
         margin-right: 20px;
       }
     </style>
+    <title>Wine Quality</title>
   </head>
   <body>
     <div class="body">
@@ -23,8 +22,8 @@
             <img style="padding: 10px;" src="http://url_to_logo"/>
           </div>
           <div class="span8">
-            <div class="row">
-              <h3>Some Title</h3>
+            <div class="row">>
+              <h3>Wine Quality</h3>
             </div>
           </div>
         </div>
@@ -42,7 +41,7 @@
               <tr>
               <? for  (var j = 0; j < data[i].length; ++j) { ?>
                 <td style='mono'>
-                  <?= data[i][j].trim().replace(/[\/ ]/g, '-') ?>
+                  <?= data[i][j] ?>
                 </td>
               <? } ?>
               </tr>

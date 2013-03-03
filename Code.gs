@@ -18,10 +18,10 @@ function getData(ranges) {
 }
 
 function getContentForTwitterBootstrap() { 
-  var content = Bootstrap.getBootstrapContents(
-    "http://bootstrap_path/img/glyphicons-halflings.png", 
+  var content = GASBootstrap.getBootstrapContents(
+    "http://bootstrap_path/img/glyphicons-halflings.png",  // provide your server path to avoid hotlinking
     "http://bootstrap_path/img/glyphicons-halflings-white.png"
-    ); //this args are icon image path. u can chage it your own. 
+    );
   return content;
 }
 
